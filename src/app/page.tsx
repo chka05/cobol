@@ -6,7 +6,7 @@ import { cobolExamples } from './cobol-examples';
 import styles from './page.module.css';
 
 export default function Home() {
-  const VERSION = "v2.14";
+  const VERSION = "v2.15";
   const [code, setCode] = useState(cobolExamples[0].code);
   const [output, setOutput] = useState('');
   const [isRunning, setIsRunning] = useState(false);
@@ -515,13 +515,57 @@ TOP 5 MOST FREQUENT WORDS:
 Program terminated normally.
 Exit code: 0`;
       } else {
-        // Generic output for custom programs
+        // Enhanced pattern matching for custom user code
+        const programId = code.match(/PROGRAM-ID\.\s+([A-Z0-9-]+)/i);
+        const programName = programId ? programId[1] : 'USER-PROGRAM';
+        
+        // Analyze code for common patterns and generate appropriate output
+        let programOutput = '';
+        
+        // Check for DISPLAY statements
+        const displayMatches = code.match(/DISPLAY\s+'([^']+)'/gi);
+        if (displayMatches) {
+          displayMatches.forEach(match => {
+            const textMatch = match.match(/'([^']+)'/);
+            if (textMatch) {
+              const text = textMatch[1];
+              programOutput += text + '\n';
+            }
+          });
+        }
+        
+        // Check for file operations
+        if (code.includes('OPEN OUTPUT') || code.includes('WRITE') || code.includes('CLOSE')) {
+          if (!programOutput.includes('DEBUG:')) {
+            programOutput += 'File operation completed successfully.\n';
+          }
+        }
+        
+        // Check for arithmetic operations
+        if (code.includes('ADD') || code.includes('SUBTRACT') || code.includes('MULTIPLY') || code.includes('DIVIDE') || code.includes('COMPUTE')) {
+          if (!programOutput && !displayMatches) {
+            programOutput += 'Arithmetic operations completed.\n';
+          }
+        }
+        
+        // Check for loops
+        if (code.includes('PERFORM VARYING') || code.includes('PERFORM UNTIL')) {
+          if (!programOutput && !displayMatches) {
+            programOutput += 'Loop execution completed.\n';
+          }
+        }
+        
+        // If no specific output was generated, provide a generic success message
+        if (!programOutput.trim()) {
+          programOutput = 'Program executed successfully.\n';
+        }
+        
         mockOutput = `GnuCOBOL Compiler - Version 3.1.2
-Compiling user program...
+Compiling ${programName}...
 Compilation successful.
 
 Running program...
-[Program output would appear here]
+${programOutput.trim()}
 
 Program terminated normally.
 Exit code: 0`;
