@@ -1,0 +1,166 @@
+.container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  font-family: var(--font-geist-sans);
+}
+
+.header {
+  background: #2c3e50;
+  color: white;
+  padding: 20px;
+  text-align: center;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.header h1 {
+  margin: 0 0 8px 0;
+  font-size: 28px;
+  font-weight: 600;
+}
+
+.header p {
+  margin: 0;
+  font-size: 16px;
+  opacity: 0.9;
+}
+
+.examplesBar {
+  background: #ecf0f1;
+  padding: 15px 20px;
+  border-bottom: 1px solid #bdc3c7;
+}
+
+.examplesBar h3 {
+  margin: 0 0 10px 0;
+  font-size: 16px;
+  color: #2c3e50;
+}
+
+.exampleButtons {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.exampleButton {
+  background: #3498db;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 12px;
+  transition: background-color 0.2s;
+}
+
+.exampleButton:hover {
+  background: #2980b9;
+}
+
+.mainContent {
+  flex: 1;
+  display: flex;
+  height: calc(100vh - 200px);
+}
+
+.editorPanel, .outputPanel {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid #bdc3c7;
+}
+
+.outputPanel {
+  border-right: none;
+  border-left: 1px solid #bdc3c7;
+}
+
+.panelHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+  background: #f8f9fa;
+  border-bottom: 1px solid #bdc3c7;
+}
+
+.panelHeader h3 {
+  margin: 0;
+  font-size: 16px;
+  color: #2c3e50;
+}
+
+.runButton {
+  background: #27ae60;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  transition: background-color 0.2s;
+}
+
+.runButton:hover:not(:disabled) {
+  background: #219a52;
+}
+
+.runButton:disabled {
+  background: #95a5a6;
+  cursor: not-allowed;
+}
+
+.clearButton {
+  background: #e74c3c;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 12px;
+  transition: background-color 0.2s;
+}
+
+.clearButton:hover {
+  background: #c0392b;
+}
+
+.output {
+  flex: 1;
+  padding: 16px;
+  margin: 0;
+  background: #2c3e50;
+  color: #ecf0f1;
+  font-family: 'Courier New', monospace;
+  font-size: 14px;
+  line-height: 1.4;
+  overflow-y: auto;
+  white-space: pre-wrap;
+}
+
+@media (max-width: 768px) {
+  .mainContent {
+    flex-direction: column;
+    height: auto;
+  }
+  
+  .editorPanel, .outputPanel {
+    border-right: none;
+    border-left: none;
+    border-bottom: 1px solid #bdc3c7;
+  }
+  
+  .outputPanel {
+    border-bottom: none;
+  }
+  
+  .exampleButtons {
+    justify-content: center;
+  }
+  
+  .header h1 {
+    font-size: 24px;
+  }
+}
