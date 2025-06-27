@@ -6,7 +6,7 @@ import { cobolExamples } from './cobol-examples';
 import styles from './page.module.css';
 
 export default function Home() {
-  const VERSION = "v2.15";
+  const VERSION = "v2.16";
   const [code, setCode] = useState(cobolExamples[0].code);
   const [output, setOutput] = useState('');
   const [isRunning, setIsRunning] = useState(false);
@@ -581,6 +581,11 @@ Exit code: 0`;
     setOutput('');
   };
 
+  const clearEditor = () => {
+    setCode('');
+    setOutput('');
+  };
+
   return (
     <div className={styles.container}>
       <header className={styles.header}>
@@ -615,13 +620,22 @@ Exit code: 0`;
         <div className={styles.editorPanel}>
           <div className={styles.panelHeader}>
             <h3>COBOL Editor</h3>
-            <button 
-              onClick={handleRunCode} 
-              disabled={isRunning}
-              className={styles.runButton}
-            >
-              {isRunning ? 'Running...' : 'Run Code'}
-            </button>
+            <div className={styles.buttonGroup}>
+              <button 
+                onClick={handleRunCode} 
+                disabled={isRunning}
+                className={styles.runButton}
+              >
+                {isRunning ? 'Running...' : 'Run Code'}
+              </button>
+              <button 
+                onClick={clearEditor}
+                className={styles.clearEditorButton}
+                title="Clear editor and output"
+              >
+                Clear
+              </button>
+            </div>
           </div>
           <CobolEditor
             value={code}
