@@ -9,8 +9,19 @@
   background: #2c3e50;
   color: white;
   padding: 20px;
-  text-align: center;
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.headerContent {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.headerContent > div:first-child {
+  text-align: left;
 }
 
 .header h1 {
@@ -23,6 +34,16 @@
   margin: 0;
   font-size: 16px;
   opacity: 0.9;
+}
+
+.version {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  font-family: 'Courier New', monospace;
+  border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .examplesBar {
@@ -160,7 +181,22 @@
     justify-content: center;
   }
   
+  .headerContent {
+    flex-direction: column;
+    gap: 16px;
+    text-align: center;
+  }
+  
+  .headerContent > div:first-child {
+    text-align: center;
+  }
+  
   .header h1 {
     font-size: 24px;
+  }
+  
+  .version {
+    font-size: 12px;
+    padding: 6px 12px;
   }
 }

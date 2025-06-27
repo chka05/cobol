@@ -6,6 +6,7 @@ import { cobolExamples } from './cobol-examples';
 import styles from './page.module.css';
 
 export default function Home() {
+  const VERSION = "v2.14";
   const [code, setCode] = useState(cobolExamples[0].code);
   const [output, setOutput] = useState('');
   const [isRunning, setIsRunning] = useState(false);
@@ -539,8 +540,15 @@ Exit code: 0`;
   return (
     <div className={styles.container}>
       <header className={styles.header}>
-        <h1>Web-based COBOL Interpreter</h1>
-        <p>Write, run, and learn COBOL programming in your browser</p>
+        <div className={styles.headerContent}>
+          <div>
+            <h1>Web-based COBOL Interpreter</h1>
+            <p>Write, run, and learn COBOL programming in your browser</p>
+          </div>
+          <div className={styles.version}>
+            {VERSION}
+          </div>
+        </div>
       </header>
 
       <div className={styles.examplesBar}>
